@@ -1,0 +1,42 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" controller="FirestoreUploadAttachment" access="global" >
+    <aura:attribute name="recordId" type="String" default="a0b6D000001P7hT" />
+    <aura:attribute name="file" type="Object"/>
+    <aura:attribute name="isPDF" type="Boolean" default="true"/>
+    <aura:attribute name="operationType" type="String" />
+    <aura:attribute name="docType" type="String" default=""/>
+    <aura:attribute name="showSpinner" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="Upload_sign_File" type="String" access="public"/>
+    <aura:attribute name="mapValues" type="object"/>
+    <aura:attribute name="sessinID" type="String" /> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <lightning:card  class="slds-align_absolute-center">
+        
+        <div class="slds-is-relative">
+            <lightning:spinner aura:id="mySpinner" variant="brand" size="large" alternativeText="waiting"
+                               class="{!v.showSpinner ? '' : 'slds-hide'}"/>
+        </div>
+        <aura:iteration items="{!v.mapValues}"  var="mapKey" indexVar="key">  
+            <tr>
+                <td >
+                    <strong>
+                        <p>{!mapKey.key}</p>
+                    </strong>
+                </td>
+            </tr>
+            <tr>
+                <aura:iteration items="{!mapKey.value}" var="mapValue">
+                    <td>
+                        <p>{!mapValue.Name}</p>
+                    </td>
+                    <td>
+                        <lightning:input aura:id="fileId" onchange="{!c.handleFilesChange}" type="file" name="file" label="" multiple="false"/>
+                        <!--lightning:input aura:id="fileId" onchange="{!c.handleFilesChange}" type="file" name="file" label="" multiple="false"/-->
+                        <button class="slds-button slds-button_brand"  id="{!mapValue.Id}" onclick="{!c.doSave}">Upload Attachment</button>	
+                        <button class="slds-button slds-button_brand" id="{!mapValue.Id}" onclick="{!c.dodownload}">Download Image</button>	
+                    </td>
+                </aura:iteration>
+            </tr>
+        </aura:iteration>
+    </lightning:card>
+</aura:component>

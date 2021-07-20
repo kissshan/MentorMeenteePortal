@@ -1,0 +1,37 @@
+<template>
+    <div class="slds-grid">
+        <div class="slds-col slds-size_3-of-12">
+
+        </div>
+        <div class="slds-col slds-size_6-of-12">
+            <article class="slds-card slds-m-top_xx-small slds-m-left_xx-small slds-m-right_xx-small">
+                <div class="slds-card__body">
+                    <p class="slds-p-horizontal_small">
+                        <c-lookup-comp
+                            obj-name="Course_Master__c"
+                            icon-name="standard:Account"
+                            label-name="Course Master"
+                            placeholder="Search" 
+                            fields={fields}
+                            display-fields={displayFields}
+                            onlookup={handleLookup} >
+                        </c-lookup-comp>
+                    </p>
+                </div>
+            </article>
+
+            <template if:true={enableCourseAssignment}>
+                <c-course-assignment course-rec-id={courseRecId} unassigned-student = {studentTrack} unassigned-mentor={mentorTrack} student-list={studentStatusList} mentor-list={mentorStatusList}></c-course-assignment>
+        </template>
+        </div>
+        <div class="slds-col slds-size_3-of-12">
+
+        </div>
+
+    </div>
+    
+        
+    
+    
+    
+</template>

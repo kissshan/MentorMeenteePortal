@@ -1,0 +1,5 @@
+<apex:page showHeader="false"  standardStylesheets="false" standardController="Mentor_Course_Schedule__c" >
+    <body>
+        yess
+    </body>
+</apex:page>

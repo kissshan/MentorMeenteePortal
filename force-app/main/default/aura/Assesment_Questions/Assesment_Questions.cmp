@@ -1,0 +1,49 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="Assesment_Questions_Helper" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordId" type="String" default="" />
+    <aura:attribute name="quesAnswerWrapper" type="Assesment_Questions_Helper.QuesWrap[]"/>
+    <aura:attribute name="checkSpinner" type="boolean" default="false" />
+
+    <lightning:card footer="" title="">
+    <lightning:layout  >
+        <aura:if isTrue="{!v.checkSpinner}">
+            <div class="exampleHolder">
+                <lightning:spinner alternativeText="Loading" size="medium" />
+            </div>
+        </aura:if>
+        <lightning:layoutItem padding="around-small">
+            <tr>
+                <th>
+                    Question
+                </th>
+                <th>
+                    Answer
+                </th>
+            </tr>
+            <aura:iteration items="{!v.quesAnswerWrapper}" var="x">
+                <tr>
+                    <td>
+                        {!x.studentAssessmetResult.Question__c}
+                    </td>
+                    <td>
+                        <aura:if isTrue="{!x.answerType == 'Picklist'}">
+                            <lightning:select  value="{!x.studentAssessmetResult.Answer__c}">
+                                <option value="">Choose one...</option>
+                                <aura:iteration items="{!x.picklistValues}" var="item">
+                                    <option text="{!item}" value="{!item}" />
+                                </aura:iteration>
+                            </lightning:select>
+                            <aura:set attribute="else">
+                                <lightning:input name="answer" label="Enter the Answer "  value="{!x.studentAssessmetResult.Answer__c}" ></lightning:input>
+                            </aura:set>
+                        </aura:if>
+                        
+                    </td>
+                </tr>
+            </aura:iteration>
+            <br/>
+            <button variant="brand" onclick="{!c.handleAnswer}" class=" slds-button slds-button_brand topmarbody slds-align_absolute-center">Insert Response</button> 
+        </lightning:layoutItem>
+    </lightning:layout>
+    </lightning:card>
+</aura:component>

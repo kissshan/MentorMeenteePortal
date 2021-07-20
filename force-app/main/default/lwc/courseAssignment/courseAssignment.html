@@ -1,0 +1,45 @@
+<template>
+    <article>
+        <div class="slds-card slds-m-top_xx-small slds-m-left_xx-small slds-m-right_xx-small">
+            <div class="slds-card__body">
+                <div class="slds-col slds-size_2-of-3 slds-p-left_xx-small">
+                    <h3><b>Unasigned Student</b> : <b>{unassignedStudent}</b></h3>
+                </div>
+                <div class="slds-col slds-size_2-of-3 slds-p-left_xx-small">
+                    <h3><b>Unasigned Mentor</b> : <b>{unassignedMentor}</b></h3>
+                </div>
+            </div>
+        </div>
+    </article>
+    <article class="slds-card slds-m-top_xx-small slds-m-left_xx-small slds-m-right_xx-small">
+        <div class="slds-card_body">
+            <button class="slds-button slds-button_brand slds-m-around_small" onclick={onclick}>Get Student List</button>
+            <button class="slds-button slds-button_brand slds-m-around_small" onclick={locationWiseList}>Based On Location</button>
+            <button class="slds-button slds-button_brand slds-m-around_small" onclick={assign}>Bulk Assign</button>
+        </div>
+    </article>
+    <template if:true={enableStudentTable}>
+        <article class="slds-card shadow slds-m-top_xx-small slds-m-left_xx-small slds-m-right_xx-small">
+            <div class="slds-card__header">
+                <h3 style="color:blueviolet"><b>Student Assignment Details</b></h3>
+            </div>
+            <div class="slds-card__body">
+            
+                <lightning-datatable
+                columns={columns}
+                data={courseDetails}
+                key-field="Id"
+                onrowaction={handleRowAction}
+                onrowselection={callRowAction}
+                onloadmore={loadMoreData}
+                ></lightning-datatable>
+            </div>
+
+        </article>
+    </template>
+    
+    
+    
+        
+    
+</template>
